@@ -14,6 +14,7 @@ function Gameboard() {
     GetAnimeCharacter();
   }, []);
 
+  // Fetch data from API
   const GetAnimeCharacter = async () => {
     const character = await fetch(
       'https://api.jikan.moe/v3/anime/40028/characters_staff'
@@ -25,6 +26,7 @@ function Gameboard() {
     filterCharacters(character);
   };
 
+  //Filter the data from API
   const formatFetch = (input: any): Info => {
     return {
       image: input.image_url,
@@ -33,12 +35,14 @@ function Gameboard() {
     };
   };
 
+  //Set number of characters based on level
   const filterCharacters = (character: Info[]) => {
     const numberOfCharacters = level * 4;
 
     setList(character.slice(0, numberOfCharacters));
   };
 
+  // Set score and best score
   const handleScore = () => {
     setScore(score + 1);
 
@@ -48,6 +52,7 @@ function Gameboard() {
     }
   };
 
+  //Handle players choices
   const handleChoice = (input: string) => {
     if (!selected.includes(input)) {
       setSelsected([...selected, input]);
