@@ -5,21 +5,30 @@ import Header from './Header';
 function Gameboard() {
   const [score, setScore] = useState(0);
   const [level, setLevel] = useState(1);
-  const [characters, setCharacters] = useState([]);
+  const [characters, setCharacters] = useState<Array<Info>>([]);
 
   const GetAnimeCharacter = async () => {
     const character = await fetch(
       'https://api.jikan.moe/v3/anime/40028/characters_staff'
-    ).then((res) => res.json());
+    )
+      .then((res) => res.json())
+      .then((res) => res.characters.map((info: any) => formatFetch(info)));
 
-    console.log(character);
-    filterCharacters(character.characters);
+    filterCharacters(character);
   };
 
-  const filterCharacters = (characters: any) => {
+  const formatFetch = (input: any): Info => {
+    return {
+      image: input.image_url,
+      id: input.mal_id,
+      name: input.name,
+    };
+  };
+
+  const filterCharacters = (character: Info[]) => {
     const numberOfCharacters = level * 4;
 
-    setCharacters(characters.slice(0, numberOfCharacters));
+    setCharacters(character.slice(0, numberOfCharacters));
   };
 
   useEffect(() => {
@@ -37,21 +46,10 @@ function Gameboard() {
   );
 }
 
-/*
-
-const formatFetch = (input: any): Info => {
-  return {
-    image: input.image_url,
-    id: input.mal_id,
-    name: input.name,
-  };
-};
-
 interface Info {
   image: string;
   id: number;
   name: string;
 }
 
-*/
 export default Gameboard;
