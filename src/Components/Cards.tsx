@@ -1,11 +1,21 @@
 import React, { FC } from 'react';
 
-const Cards: FC<Prop> = (prop) => {
+const Cards: FC<Prop> = (props) => {
+  const handleClick: (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => void = (e) => {
+    props.onClick(e.currentTarget.id);
+  };
   return (
     <div className="card-list">
-      {prop.characters.map((char) => {
+      {props.list.map((char) => {
         return (
-          <div key={char.id} className="card-container">
+          <div
+            key={char.id}
+            id={char.id.toString()}
+            className="card-container"
+            onClick={handleClick}
+          >
             <img src={char.image} alt={char.name} />
             <h4>{char.name}</h4>
           </div>
@@ -16,7 +26,8 @@ const Cards: FC<Prop> = (prop) => {
 };
 
 interface Prop {
-  characters: Info[];
+  list: Info[];
+  onClick: (input: string) => void;
 }
 
 interface Info {

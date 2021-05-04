@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { parseJsonSourceFileConfigFileContent } from 'typescript';
 import Cards from './Cards';
 import Header from './Header';
 
 function Gameboard() {
   const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
   const [level, setLevel] = useState(1);
   const [characters, setCharacters] = useState<Array<Info>>([]);
+  const [list, setList] = useState<Array<Info>>([]);
+  const [selected, setSelsected] = useState<Array<String>>([]);
+
+  useEffect(() => {
+    GetAnimeCharacter();
+  }, []);
 
   const GetAnimeCharacter = async () => {
     const character = await fetch(
@@ -16,6 +22,7 @@ function Gameboard() {
       .then((res) => res.characters.map((info: any) => formatFetch(info)));
 
     setCharacters(character);
+    filterCharacters(character);
   };
 
   const formatFetch = (input: any): Info => {
@@ -29,20 +36,33 @@ function Gameboard() {
   const filterCharacters = (character: Info[]) => {
     const numberOfCharacters = level * 4;
 
-    setCharacters(character.slice(0, numberOfCharacters));
+    setList(character.slice(0, numberOfCharacters));
   };
 
-  useEffect(() => {
-    GetAnimeCharacter();
-  }, []);
+  const handleScore = () => {
+    setScore(score + 1);
 
-  console.log(characters);
+    if (score > bestScore) {
+      setBestScore(score);
+      console.log(bestScore);
+    }
+  };
+
+  const handleChoice = (input: string) => {
+    if (!selected.includes(input)) {
+      setSelsected([...selected, input]);
+      handleScore();
+      console.log(score);
+    } else {
+      console.log('you lost');
+    }
+  };
 
   return (
     <main>
       <Header />
       <h1>Choose a character only once</h1>
-      <Cards characters={characters} />
+      <Cards list={list} onClick={(input: string) => handleChoice(input)} />
     </main>
   );
 }
