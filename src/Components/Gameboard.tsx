@@ -65,7 +65,7 @@ function Gameboard() {
 
   return (
     <main>
-      <Header />
+      <Header level={level} score={score} bestScore={bestScore} />
       <h1>Choose a character only once</h1>
       <Cards list={list} onClick={(input: string) => handleChoice(input)} />
     </main>
