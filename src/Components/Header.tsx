@@ -8,7 +8,7 @@ function Header() {
       </div>
       <div className="score-container">
         <div className="score">Score: 5</div>
-        <div className="best-score">BestScore: 10</div>
+        <div className="best-score">Best Score: 10</div>
       </div>
     </header>
   );

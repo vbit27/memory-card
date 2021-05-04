@@ -4,11 +4,11 @@ import Header from './Header';
 
 function Gameboard() {
   return (
-    <div>
+    <main>
       <Header />
       <h1>Choose a character only once</h1>
       <Cards />
-    </div>
+    </main>
   );
 }
 
