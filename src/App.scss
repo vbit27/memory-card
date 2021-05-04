@@ -1,0 +1,23 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+header {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  height: 10vh;
+  background-color: rgb(193, 236, 222);
+
+  .level {
+    flex-grow: 1;
+  }
+
+  .score-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-around;
+  }
+}
