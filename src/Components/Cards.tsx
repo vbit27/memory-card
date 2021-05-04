@@ -1,31 +1,28 @@
-import React from 'react';
+import React, { FC } from 'react';
 
-function Cards() {
+const Cards: FC<Prop> = (prop) => {
   return (
     <div className="card-list">
-      <div>
-        <img
-          src="https:\/\/cdn.myanimelist.net\/images\/characters\/9\/215563.jpg?s=5b0650bb09a7e053afc6bad84ab48947"
-          alt="character"
-        />
-        <h3>Mikasa</h3>
-      </div>
-      <div>
-        <img
-          src="https:\/\/cdn.myanimelist.net\/images\/characters\/9\/215563.jpg?s=5b0650bb09a7e053afc6bad84ab48947"
-          alt="character"
-        />
-        <h3>Mikasa</h3>
-      </div>
-      <div>
-        <img
-          src="https:\/\/cdn.myanimelist.net\/images\/characters\/9\/215563.jpg?s=5b0650bb09a7e053afc6bad84ab48947"
-          alt="character"
-        />
-        <h3>Mikasa</h3>
-      </div>
+      {prop.characters.map((char) => {
+        return (
+          <div key={char.id} className="card-container">
+            <img src={char.image} alt={char.name} />
+            <h4>{char.name}</h4>
+          </div>
+        );
+      })}
     </div>
   );
+};
+
+interface Prop {
+  characters: Info[];
+}
+
+interface Info {
+  image: string;
+  id: number;
+  name: string;
 }
 
 export default Cards;

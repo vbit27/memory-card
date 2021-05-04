@@ -30,4 +30,9 @@ main {
   display: flex;
   justify-content: space-around;
   margin-top: 3rem;
+  flex-wrap: wrap;
+
+  img {
+    width: 150px;
+  }
 }

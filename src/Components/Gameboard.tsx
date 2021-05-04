@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { parseJsonSourceFileConfigFileContent } from 'typescript';
 import Cards from './Cards';
 import Header from './Header';
 
@@ -14,7 +15,7 @@ function Gameboard() {
       .then((res) => res.json())
       .then((res) => res.characters.map((info: any) => formatFetch(info)));
 
-    filterCharacters(character);
+    setCharacters(character);
   };
 
   const formatFetch = (input: any): Info => {
@@ -41,7 +42,7 @@ function Gameboard() {
     <main>
       <Header />
       <h1>Choose a character only once</h1>
-      <Cards />
+      <Cards characters={characters} />
     </main>
   );
 }
