@@ -47,6 +47,11 @@ const Gameboard: FC = () => {
     };
   };
 
+  const handleStartGame = () => {
+    clearScore();
+    setPlaying(true);
+  };
+
   //Set number of characters based on level
   const filterCharacters = (character: Info[]) => {
     const shuffled = character.sort(() => 0.5 - Math.random());
@@ -56,7 +61,7 @@ const Gameboard: FC = () => {
     setList(shuffled.slice(0, choices));
   };
 
-  // Set score and best score
+  // Handle Scores
   const handleScore = () => {
     setScore((prevScore) => prevScore + 1);
   };
@@ -74,12 +79,9 @@ const Gameboard: FC = () => {
       handleScore();
     } else {
       handleBestScore();
-      clearScore();
       setPlaying(false);
     }
   };
-
-  console.log(level);
 
   const clearScore = () => {
     setScore(0);
@@ -87,11 +89,22 @@ const Gameboard: FC = () => {
     setSelected([]);
   };
 
+  if (!playing && score) {
+    return (
+      <div>
+        <h1>You Lost</h1>
+        <h2>Your Score: {score}</h2>
+        <h2>You reached level: {level}</h2>
+        <button onClick={handleStartGame}>Restart Game</button>
+      </div>
+    );
+  }
+
   if (!playing) {
     return (
       <div>
         <h1>Start Game</h1>
-        <button onClick={() => setPlaying(true)}>Start Game</button>
+        <button onClick={handleStartGame}>Start Game</button>
       </div>
     );
   }
