@@ -9,6 +9,7 @@ const Gameboard: FC = () => {
   const [characters, setCharacters] = useState<Array<Info>>([]);
   const [list, setList] = useState<Array<Info>>([]);
   const [selected, setSelected] = useState<Array<String>>([]);
+  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
     GetAnimeCharacter();
@@ -74,6 +75,7 @@ const Gameboard: FC = () => {
     } else {
       handleBestScore();
       clearScore();
+      setPlaying(false);
     }
   };
 
@@ -84,6 +86,15 @@ const Gameboard: FC = () => {
     setLevel(1);
     setSelected([]);
   };
+
+  if (!playing) {
+    return (
+      <div>
+        <h1>Start Game</h1>
+        <button onClick={() => setPlaying(true)}>Start Game</button>
+      </div>
+    );
+  }
 
   return (
     <main>
