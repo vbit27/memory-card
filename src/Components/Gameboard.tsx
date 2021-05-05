@@ -14,6 +14,18 @@ function Gameboard() {
     GetAnimeCharacter();
   }, []);
 
+  useEffect(() => {
+    setSelsected([]);
+    filterCharacters(characters);
+  }, [level]);
+
+  useEffect(() => {
+    if (score > bestScore) {
+      setBestScore(score);
+      handleLevel();
+    }
+  }, [score]);
+
   // Fetch data from API
   const GetAnimeCharacter = async () => {
     const character = await fetch(
@@ -45,10 +57,11 @@ function Gameboard() {
   // Set score and best score
   const handleScore = () => {
     setScore(score + 1);
+  };
 
-    if (score > bestScore) {
-      setBestScore(score);
-      console.log(bestScore);
+  const handleLevel = () => {
+    if (list.length === selected.length) {
+      setLevel(level + 1);
     }
   };
 
@@ -57,12 +70,13 @@ function Gameboard() {
     if (!selected.includes(input)) {
       setSelsected([...selected, input]);
       handleScore();
-      console.log(score);
     } else {
       clearScore();
-      console.log('you lost');
     }
   };
+
+  console.log(list.length);
+  console.log(selected.length);
 
   const clearScore = () => {
     setScore(0);
