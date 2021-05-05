@@ -1,30 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import Cards from './Cards';
 import Header from './Header';
 
-function Gameboard() {
+const Gameboard: FC = () => {
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [level, setLevel] = useState(1);
   const [characters, setCharacters] = useState<Array<Info>>([]);
   const [list, setList] = useState<Array<Info>>([]);
-  const [selected, setSelsected] = useState<Array<String>>([]);
+  const [selected, setSelected] = useState<Array<String>>([]);
 
   useEffect(() => {
     GetAnimeCharacter();
+    console.log('there');
   }, []);
 
   useEffect(() => {
-    setSelsected([]);
+    setSelected([]);
     filterCharacters(characters);
+    console.log('here');
   }, [level]);
 
   useEffect(() => {
-    if (score > bestScore) {
-      setBestScore(score);
-      handleLevel();
+    if (list.length && list.length === selected.length) {
+      console.log('hiii');
+      setLevel((prevLevel) => prevLevel + 1);
     }
-  }, [score]);
+  }, [selected]);
 
   // Fetch data from API
   const GetAnimeCharacter = async () => {
@@ -56,32 +58,32 @@ function Gameboard() {
 
   // Set score and best score
   const handleScore = () => {
-    setScore(score + 1);
+    setScore((prevScore) => prevScore + 1);
   };
 
-  const handleLevel = () => {
-    if (list.length === selected.length) {
-      setLevel(level + 1);
+  const handleBestScore = () => {
+    if (score > bestScore) {
+      setBestScore(score);
     }
   };
 
   //Handle players choices
   const handleChoice = (input: string) => {
     if (!selected.includes(input)) {
-      setSelsected([...selected, input]);
+      setSelected([...selected, input]);
       handleScore();
     } else {
+      handleBestScore();
       clearScore();
     }
   };
 
-  console.log(list.length);
-  console.log(selected.length);
+  console.log(level);
 
   const clearScore = () => {
     setScore(0);
     setLevel(1);
-    setSelsected([]);
+    setSelected([]);
   };
 
   return (
@@ -91,7 +93,7 @@ function Gameboard() {
       <Cards list={list} onClick={(input: string) => handleChoice(input)} />
     </main>
   );
-}
+};
 
 interface Info {
   image: string;
