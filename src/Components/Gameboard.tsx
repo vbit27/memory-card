@@ -12,18 +12,15 @@ const Gameboard: FC = () => {
 
   useEffect(() => {
     GetAnimeCharacter();
-    console.log('there');
   }, []);
 
   useEffect(() => {
     setSelected([]);
     filterCharacters(characters);
-    console.log('here');
   }, [level]);
 
   useEffect(() => {
     if (list.length && list.length === selected.length) {
-      console.log('hiii');
       setLevel((prevLevel) => prevLevel + 1);
     }
   }, [selected]);

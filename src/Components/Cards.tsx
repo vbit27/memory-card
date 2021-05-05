@@ -1,6 +1,17 @@
 import React, { FC } from 'react';
 
 const Cards: FC<Prop> = (props) => {
+  const shuffleArray = (array: Array<Info>) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1));
+      let temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+  };
+
+  shuffleArray(props.list);
+
   const handleClick: (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => void = (e) => {
