@@ -37,9 +37,9 @@ function Gameboard() {
 
   //Set number of characters based on level
   const filterCharacters = (character: Info[]) => {
-    const numberOfCharacters = level * 4;
+    const choices = level * 4;
 
-    setList(character.slice(0, numberOfCharacters));
+    setList(character.slice(0, choices));
   };
 
   // Set score and best score
@@ -59,8 +59,15 @@ function Gameboard() {
       handleScore();
       console.log(score);
     } else {
+      clearScore();
       console.log('you lost');
     }
+  };
+
+  const clearScore = () => {
+    setScore(0);
+    setLevel(1);
+    setSelsected([]);
   };
 
   return (
