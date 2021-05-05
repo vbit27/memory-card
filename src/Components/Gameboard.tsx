@@ -48,9 +48,11 @@ const Gameboard: FC = () => {
 
   //Set number of characters based on level
   const filterCharacters = (character: Info[]) => {
+    const shuffled = character.sort(() => 0.5 - Math.random());
+
     const choices = level * 4;
 
-    setList(character.slice(0, choices));
+    setList(shuffled.slice(0, choices));
   };
 
   // Set score and best score
