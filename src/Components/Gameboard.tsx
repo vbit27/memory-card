@@ -102,9 +102,11 @@ const Gameboard: FC = () => {
 
   if (!playing) {
     return (
-      <div>
-        <h1>Start Game</h1>
-        <button onClick={handleStartGame}>Start Game</button>
+      <div className="start-container">
+        <div className="button-container">
+          <h1>Start Game</h1>
+          <button onClick={handleStartGame}>Start Game</button>
+        </div>
       </div>
     );
   }
@@ -112,7 +114,6 @@ const Gameboard: FC = () => {
   return (
     <main>
       <Header level={level} score={score} bestScore={bestScore} />
-      <h1>Choose a character only once</h1>
       <Cards list={list} onClick={(input: string) => handleChoice(input)} />
     </main>
   );

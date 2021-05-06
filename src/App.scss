@@ -4,21 +4,31 @@
   box-sizing: border-box;
 }
 
+body {
+  background-image: url(./images/background.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+}
+
 header {
   display: flex;
   text-align: center;
   align-items: center;
   height: 10vh;
-  background-color: rgb(193, 236, 222);
+  background-color: rgba(27, 27, 27, 0.425);
 
   .level {
     flex-grow: 1;
+    font-size: 2rem;
   }
 
   .score-container {
     flex-grow: 1;
     display: flex;
     justify-content: space-around;
+    font-size: 1.5rem;
   }
 }
 
@@ -26,13 +36,42 @@ main {
   text-align: center;
 }
 
+.start-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #b34538;
+    border: 10px solid #303642;
+    padding: 2rem;
+    box-shadow: 3px 4px 15px #888888;
+  }
+}
+
 .card-list {
   display: flex;
   justify-content: space-around;
   margin-top: 3rem;
   flex-wrap: wrap;
+  width: 80%;
+  margin: 2rem auto;
 
   img {
     width: 150px;
+  }
+
+  .card-container {
+    background-color: #b34538;
+    padding: 0.8rem;
+    margin: 0.5rem;
+    cursor: pointer;
+  }
+
+  .card-container:hover {
+    transform: scale(1.1);
   }
 }
