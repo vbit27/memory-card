@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 const Cards: FC<Prop> = (props) => {
+  // shuffle cards every time one of them is selected
   const shuffleArray = (array: Array<Info>) => {
     for (let i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));

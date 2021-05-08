@@ -10,6 +10,21 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   color: white;
+
+  button {
+    background-color: #303642;
+    width: fit-content;
+    color: white;
+    padding: 1em;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 1rem auto;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+  }
 }
 
 header {
@@ -41,6 +56,15 @@ main {
   justify-content: center;
   align-items: center;
   height: 100vh;
+
+  h1 {
+    text-align: center;
+    margin: 1rem;
+  }
+
+  li {
+    line-height: 2rem;
+  }
 
   .button-container {
     display: flex;

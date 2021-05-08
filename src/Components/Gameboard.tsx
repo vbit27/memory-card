@@ -13,17 +13,20 @@ const Gameboard: FC = () => {
 
   useEffect(() => {
     GetAnimeCharacter();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     setSelected([]);
     filterCharacters(characters);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [level]);
 
   useEffect(() => {
     if (list.length && list.length === selected.length) {
       setLevel((prevLevel) => prevLevel + 1);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selected]);
 
   // Fetch data from API
@@ -89,13 +92,24 @@ const Gameboard: FC = () => {
     setSelected([]);
   };
 
+  if (score === 35) {
+    <div className="start-container">
+      <div className="button-container">
+        <h1>YOU WON!!!!</h1>
+        <button onClick={handleStartGame}>Restart Game</button>
+      </div>
+    </div>;
+  }
+
   if (!playing && score) {
     return (
-      <div>
-        <h1>You Lost</h1>
-        <h2>Your Score: {score}</h2>
-        <h2>You reached level: {level}</h2>
-        <button onClick={handleStartGame}>Restart Game</button>
+      <div className="start-container">
+        <div className="button-container">
+          <h1>You Lost</h1>
+          <h3>Your Score: {score}</h3>
+          <h3>Level: {level}</h3>
+          <button onClick={handleStartGame}>Restart Game</button>
+        </div>
       </div>
     );
   }
@@ -105,6 +119,12 @@ const Gameboard: FC = () => {
       <div className="start-container">
         <div className="button-container">
           <h1>Start Game</h1>
+          <ul>
+            Game Rules:
+            <li>Pick a card only once</li>
+            <li>When you pick all cards, you go to the next level</li>
+            <li>If you choose the same card twice, you lose</li>
+          </ul>
           <button onClick={handleStartGame}>Start Game</button>
         </div>
       </div>
